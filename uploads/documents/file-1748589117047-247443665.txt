@@ -1,0 +1,62 @@
+Ninjanin
+
+╰─ docker run --rm -v ${PWD}:/dotnetapi -w /dotnetapi mcr.microsoft.com/dotnet/sdk:8.0 dotnet new webapi -o dotnetapi
+docker run --rm -v ${PWD}:/angular -w /angular node:20.15.0-alpine sh -c "npm install -g @angular/cli && ng new angular --defaults"
+
+
+Day 2:  Full Stack with Docker 2025 / 5:00:56
+
+https://youtu.be/rncyL7EOqlQ
+
+ดาวน์โหลดเอกสารประกอบการอบรม
+---
+https://bit.ly/fullstack-docker-2025
+
+โค้ดตัวอย่างในคลิปนี้
+---
+https://github.com/iamsamitdev/MernStackDockerDay2
+https://github.com/iamsamitdev/NetCoreAngularDockerDay2
+
+************************************************
+สนใจหลักสูตรอบรมอื่นๆ ของสถาบันไอทีจีเนียสได้ที่
+https://www.itgenius.co.th/online-courses/all
+https://www.itgenius.co.th/courses/all
+************************************************
+
+บริษัท ไอทีจีเนียส เอ็นจิเนียริ่ง จำกัด
+บริการอบรมพัฒนาเว็บไซต์ และรับทำเว็บไซต์ งานกราฟฟิก
+
+——
+
+++++++++++++++++++++++++++++++++
++ วิดีโอบันทึกการอบรม Full Stack with Docker 2025
+++++++++++++++++++++++++++++++++
+Day 2:  ความยาว 3:34:27
+---
+ความยาวรวม: 3 ชั่วโมง 34 นาที 27 วินาที
+---
+เอกสารประกอบการอบรม
+---
+https://bit.ly/fullstack-docker-2025
+
+----------------------------------
+วันที่ 2
+----------------------------------
+https://youtu.be/lbucFi7mCa4
+
+โค้ดตัวอย่างในคลิปนี้
+---
+https://github.com/iamsamitdev/NodeJSDockerfileOnlineDay1
+https://github.com/iamsamitdev/NginxDockerComposeOnlineDay1
+https://github.com/iamsamitdev/WordPressDockerOnlineDay1
+
+************************************************
+สนใจหลักสูตรอบรมอื่นๆ ของสถาบันไอทีจีเนียสได้ที่
+https://www.itgenius.co.th/online-courses/all
+https://www.itgenius.co.th/courses/all
+************************************************
+ฝากกดติดตามช่องใน youtube ของผมที่
+https://www.youtube.com/user/itgeniuseng
+************************************************
+ขอบคุณมากครับ
+อ.สามิตร โกยม

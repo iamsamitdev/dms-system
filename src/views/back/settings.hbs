@@ -1,0 +1,333 @@
+<!-- Settings Header -->
+<div class="mb-8">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900">Settings</h1>
+            <p class="mt-2 text-gray-600">Configure system preferences and manage application settings.</p>
+        </div>
+        <div class="mt-4 sm:mt-0 flex space-x-3">
+            <button class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-50 transition duration-200">
+                <i class="fas fa-undo mr-2"></i>
+                Reset to Default
+            </button>
+            <button class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-2 rounded-lg font-semibold hover:from-blue-600 hover:to-indigo-700 transition duration-200 transform hover:scale-105 shadow-lg">
+                <i class="fas fa-save mr-2"></i>
+                Save Changes
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Settings Navigation Tabs -->
+<div class="bg-white rounded-xl shadow-sm border border-gray-100 mb-6">
+    <div class="border-b border-gray-200">
+        <nav class="flex space-x-8 px-6" aria-label="Tabs">
+            <button class="border-b-2 border-blue-500 py-4 px-1 text-sm font-medium text-blue-600 whitespace-nowrap">
+                General
+            </button>
+            <button class="border-b-2 border-transparent py-4 px-1 text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap">
+                Security
+            </button>
+            <button class="border-b-2 border-transparent py-4 px-1 text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap">
+                Storage
+            </button>
+            <button class="border-b-2 border-transparent py-4 px-1 text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap">
+                Notifications
+            </button>
+            <button class="border-b-2 border-transparent py-4 px-1 text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap">
+                Backup
+            </button>
+        </nav>
+    </div>
+</div>
+
+<!-- Settings Content -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Main Settings Panel -->
+    <div class="lg:col-span-2 space-y-6">
+        <!-- General Settings -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100">
+            <div class="p-6 border-b border-gray-100">
+                <h3 class="text-lg font-semibold text-gray-900">General Settings</h3>
+                <p class="text-sm text-gray-600 mt-1">Configure basic system preferences</p>
+            </div>
+            <div class="p-6 space-y-6">
+                <!-- System Name -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">System Name</label>
+                    <input type="text" value="DMS System" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                    <p class="text-xs text-gray-500 mt-1">This name will appear in the header and emails</p>
+                </div>
+                
+                <!-- Company Information -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Company Name</label>
+                        <input type="text" value="Your Company Ltd." class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Contact Email</label>
+                        <input type="email" value="admin@company.com" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                    </div>
+                </div>
+                
+                <!-- Time Zone -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Time Zone</label>
+                    <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                        <option>UTC+07:00 (Bangkok, Hanoi, Jakarta)</option>
+                        <option>UTC+00:00 (London, Dublin, Lisbon)</option>
+                        <option>UTC-05:00 (New York, Toronto, Bogota)</option>
+                        <option>UTC+09:00 (Tokyo, Seoul, Osaka)</option>
+                    </select>
+                </div>
+                
+                <!-- Language -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Default Language</label>
+                    <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                        <option>English (US)</option>
+                        <option>ไทย (Thai)</option>
+                        <option>日本語 (Japanese)</option>
+                        <option>中文 (Chinese)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- File Upload Settings -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100">
+            <div class="p-6 border-b border-gray-100">
+                <h3 class="text-lg font-semibold text-gray-900">File Upload Settings</h3>
+                <p class="text-sm text-gray-600 mt-1">Configure file upload restrictions and limits</p>
+            </div>
+            <div class="p-6 space-y-6">
+                <!-- Max File Size -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Maximum File Size (MB)</label>
+                    <input type="number" value="100" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                    <p class="text-xs text-gray-500 mt-1">Maximum size for individual file uploads</p>
+                </div>
+                
+                <!-- Allowed File Types -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Allowed File Types</label>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <label class="flex items-center">
+                            <input type="checkbox" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-2 text-sm text-gray-700">PDF</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-2 text-sm text-gray-700">DOC/DOCX</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-2 text-sm text-gray-700">XLS/XLSX</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-2 text-sm text-gray-700">Images</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-2 text-sm text-gray-700">Videos</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-2 text-sm text-gray-700">Audio</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-2 text-sm text-gray-700">ZIP/RAR</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <span class="ml-2 text-sm text-gray-700">Others</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Auto Virus Scan -->
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h4 class="text-sm font-medium text-gray-700">Auto Virus Scan</h4>
+                        <p class="text-xs text-gray-500">Automatically scan uploaded files for viruses</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" checked class="sr-only peer">
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Management Settings -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100">
+            <div class="p-6 border-b border-gray-100">
+                <h3 class="text-lg font-semibold text-gray-900">User Management</h3>
+                <p class="text-sm text-gray-600 mt-1">Configure user registration and access settings</p>
+            </div>
+            <div class="p-6 space-y-6">
+                <!-- Registration Settings -->
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-700">Allow User Registration</h4>
+                            <p class="text-xs text-gray-500">Allow new users to register accounts</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                        </label>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-700">Email Verification Required</h4>
+                            <p class="text-xs text-gray-500">Require email verification for new accounts</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                        </label>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-700">Admin Approval Required</h4>
+                            <p class="text-xs text-gray-500">Require admin approval for new accounts</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Default Role -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Default Role for New Users</label>
+                    <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                        <option>User</option>
+                        <option>Guest</option>
+                        <option>Manager</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Sidebar -->
+    <div class="space-y-6">
+        <!-- System Status -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100">
+            <div class="p-6 border-b border-gray-100">
+                <h3 class="text-lg font-semibold text-gray-900">System Status</h3>
+            </div>
+            <div class="p-6 space-y-4">
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-600">Server Status</span>
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                        <div class="w-2 h-2 bg-green-500 rounded-full mr-1"></div>
+                        Online
+                    </span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-600">Database</span>
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                        <div class="w-2 h-2 bg-green-500 rounded-full mr-1"></div>
+                        Connected
+                    </span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-600">Storage</span>
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                        <div class="w-2 h-2 bg-yellow-500 rounded-full mr-1"></div>
+                        67% Used
+                    </span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-600">Backup</span>
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                        <div class="w-2 h-2 bg-green-500 rounded-full mr-1"></div>
+                        Up to date
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100">
+            <div class="p-6 border-b border-gray-100">
+                <h3 class="text-lg font-semibold text-gray-900">Quick Actions</h3>
+            </div>
+            <div class="p-6 space-y-3">
+                <button class="w-full flex items-center space-x-3 p-3 text-left hover:bg-blue-50 rounded-lg transition duration-200 group">
+                    <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center group-hover:bg-blue-200">
+                        <i class="fas fa-database text-blue-600 text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-900">Backup Database</p>
+                        <p class="text-xs text-gray-500">Create system backup</p>
+                    </div>
+                </button>
+                
+                <button class="w-full flex items-center space-x-3 p-3 text-left hover:bg-green-50 rounded-lg transition duration-200 group">
+                    <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-200">
+                        <i class="fas fa-broom text-green-600 text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-900">Clear Cache</p>
+                        <p class="text-xs text-gray-500">Clear system cache</p>
+                    </div>
+                </button>
+                
+                <button class="w-full flex items-center space-x-3 p-3 text-left hover:bg-purple-50 rounded-lg transition duration-200 group">
+                    <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center group-hover:bg-purple-200">
+                        <i class="fas fa-sync text-purple-600 text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-900">System Update</p>
+                        <p class="text-xs text-gray-500">Check for updates</p>
+                    </div>
+                </button>
+                
+                <button class="w-full flex items-center space-x-3 p-3 text-left hover:bg-red-50 rounded-lg transition duration-200 group">
+                    <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center group-hover:bg-red-200">
+                        <i class="fas fa-power-off text-red-600 text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-900">Restart System</p>
+                        <p class="text-xs text-gray-500">Restart application</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- System Information -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100">
+            <div class="p-6 border-b border-gray-100">
+                <h3 class="text-lg font-semibold text-gray-900">System Information</h3>
+            </div>
+            <div class="p-6 space-y-3">
+                <div class="flex justify-between">
+                    <span class="text-sm text-gray-600">Version</span>
+                    <span class="text-sm font-medium text-gray-900">1.0.0</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-sm text-gray-600">Node.js</span>
+                    <span class="text-sm font-medium text-gray-900">v18.17.0</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-sm text-gray-600">Database</span>
+                    <span class="text-sm font-medium text-gray-900">PostgreSQL 15</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-sm text-gray-600">Uptime</span>
+                    <span class="text-sm font-medium text-gray-900">7d 12h 34m</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

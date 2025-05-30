@@ -1,0 +1,76 @@
+ติดตั้ง Library
+—
+npm i ts-node-dev -D
+npm i express
+npm i @types/express -D
+npm i @types/node -D
+npm i dotenv
+npm i pg
+npm i @types/pg -D
+npm i swagger-jsdoc swagger-ui-express
+npm i @types/swagger-jsdoc @types/swagger-ui-express -D
+
+npm i jsonwebtoken bcryptjs 
+npm i @types/jsonwebtoken @types/bcryptjs -D
+
+npm i cors
+npm i @types/cors -D
+
+ถอนการติดตั้ง Library
+—
+npm un ts-node-dev
+
+Test CORS
+—
+curl -v --request OPTIONS "http://localhost:3000/api/testdb" -H "Origin: http://localhost:4200" -H "Access-Control-Request-Method: GET"
+
+git --version
+git init
+git add  .
+git commit  -m "first commit"
+
+ไปสร้าง repo บน github
+git remote add origin https://github.com/iamsamitdev/ExpressAPIPostgreSQLA.git
+git branch -M main
+git push -u origin main
+
+git add .
+git commit -m "update swagger"
+git push --all
+
+
+(user) - samit
+(pass) - XRi6xBU5mTvN4uWmnvbJEgPoToyh81eX
+(host) - dpg-cu3od73tq21c73ap8org-a.singapore-postgres.render.com
+(dbname) expressdb_0zy1
+
+
+http://localhost:3000/members/1?type=admin&page=1
+
+
+
+db.createUser(
+{
+	user: "superadmin",
+	pwd: "123456",
+	roles: [
+		{
+			role: "root",
+			db: "admin"
+		}
+	]
+}
+)
+
+
+brew services start mongodb-community@8.0
+brew services stop mongodb-community@8.0
+brew services restart mongodb-community@8.0
+brew services list
+
+mongosh -u superadmin -p 123456 --authenticationDatabase admin
+
+
+
+
+

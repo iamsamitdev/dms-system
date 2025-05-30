@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}} - DMS Admin</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link href="/css/style.css" rel="stylesheet">
+    <meta name="description" content="{{description}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        {{> sidebar}}
+        
+        <!-- Main Content -->
+        <div class="flex flex-col flex-1 overflow-hidden">
+            <!-- Header -->
+            {{> header}}
+            
+            <!-- Main Content Area -->
+            <main class="flex-1 p-6 overflow-x-hidden overflow-y-auto bg-gray-100">
+                {{{body}}}
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar')
+            const overlay = document.getElementById('sidebar-overlay')
+            
+            if (sidebar.classList.contains('-translate-x-full')) {
+                // Open sidebar
+                sidebar.classList.remove('-translate-x-full')
+                overlay.style.display = 'block'
+            } else {
+                // Close sidebar
+                sidebar.classList.add('-translate-x-full')
+                overlay.style.display = 'none'
+            }
+        }
+        
+        // Close sidebar function
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar')
+            const overlay = document.getElementById('sidebar-overlay')
+            
+            sidebar.classList.add('-translate-x-full')
+            overlay.style.display = 'none'
+        }
+        
+        // User dropdown toggle
+        function toggleUserDropdown() {
+            const dropdown = document.getElementById('user-dropdown')
+            dropdown.classList.toggle('hidden')
+        }
+        
+        // Confirm logout with SweetAlert2
+        async function confirmLogout() {
+            const result = await Swal.fire({
+                title: 'ออกจากระบบ?',
+                text: 'คุณต้องการออกจากระบบหรือไม่?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#ef4444',
+                cancelButtonColor: '#6b7280',
+                confirmButtonText: 'ออกจากระบบ',
+                cancelButtonText: 'ยกเลิก',
+                reverseButtons: true,
+                customClass: {
+                    popup: 'rounded-xl',
+                    confirmButton: 'rounded-lg px-6 py-2',
+                    cancelButton: 'rounded-lg px-6 py-2'
+                }
+            })
+            
+            return result.isConfirmed
+        }
+        
+        // Handle logout with async confirmation
+        async function handleLogout(event) {
+            event.preventDefault()
+            
+            const confirmed = await confirmLogout()
+            if (confirmed) {
+                // Show loading
+                Swal.fire({
+                    title: 'กำลังออกจากระบบ...',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    showConfirmButton: false,
+                    didOpen: () => {
+                        Swal.showLoading()
+                    }
+                })
+                
+                // Redirect to logout
+                window.location.href = '/auth/logout'
+            }
+        }
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('user-dropdown')
+            const userButton = document.getElementById('user-button')
+            
+            if (!userButton.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.add('hidden')
+            }
+        })
+        
+        // Close sidebar when pressing Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeSidebar()
+            }
+        })
+        
+        // Active menu highlighting
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname
+            const menuLinks = document.querySelectorAll('nav ul li a')
+            
+            menuLinks.forEach(link => {
+                const href = link.getAttribute('href')
+                if (href === currentPath) {
+                    // Remove default classes
+                    link.classList.remove('text-gray-300', 'hover:bg-gray-700', 'hover:text-white')
+                    // Add active classes
+                    link.classList.add('bg-blue-600', 'text-white')
+                }
+            })
+        })
+    </script>
+</body>
+</html>

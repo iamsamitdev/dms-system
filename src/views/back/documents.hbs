@@ -1,0 +1,684 @@
+<!-- Documents Header -->
+<div class="mb-8">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900">Documents</h1>
+            <p class="mt-2 text-gray-600">Manage and organize all your documents in one place.</p>
+        </div>
+        <div class="flex mt-4 space-x-3 sm:mt-0">
+            <button class="px-4 py-2 font-medium text-gray-700 transition duration-200 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
+                <i class="mr-2 fas fa-filter"></i>
+                Filter
+            </button>
+            <button id="uploadBtn" class="px-6 py-2 font-semibold text-white transition duration-200 transform rounded-lg shadow-lg bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 hover:scale-105">
+                <i class="mr-2 fas fa-plus"></i>
+                Upload Document
+            </button>
+        </div>
+    </div>
+</div>
+
+{{#if error}}
+<!-- Error Message -->
+<div class="p-4 mb-6 text-red-700 bg-red-100 border border-red-300 rounded-lg">
+    <div class="flex items-center">
+        <i class="mr-2 fas fa-exclamation-triangle"></i>
+        <span>{{error}}</span>
+    </div>
+</div>
+{{/if}}
+
+<!-- Search and Filter Bar -->
+<div class="p-6 mb-6 bg-white border border-gray-100 shadow-sm rounded-xl">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-4">
+        <!-- Search -->
+        <div class="md:col-span-2">
+            <div class="relative">
+                <input type="text" placeholder="Search documents..." class="w-full py-2 pl-10 pr-4 transition duration-200 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <i class="text-gray-400 fas fa-search"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- File Type Filter -->
+        <div>
+            <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <option>All Types</option>
+                <option>PDF</option>
+                <option>Word Documents</option>
+                <option>Excel</option>
+                <option>Images</option>
+                <option>Videos</option>
+            </select>
+        </div>
+        
+        <!-- Date Filter -->
+        <div>
+            <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <option>All Dates</option>
+                <option>Today</option>
+                <option>This Week</option>
+                <option>This Month</option>
+                <option>This Year</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 gap-6 mb-6 md:grid-cols-4">
+    <div class="p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-gray-600">เอกสารทั้งหมด</p>
+                <p class="mt-1 text-2xl font-bold text-gray-900">{{pagination.totalItems}}</p>
+            </div>
+            <div class="flex items-center justify-center w-10 h-10 bg-blue-100 rounded-lg">
+                <i class="text-blue-600 fas fa-file-alt"></i>
+            </div>
+        </div>
+    </div>
+    
+    <div class="p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-gray-600">หน้าปัจจุบัน</p>
+                <p class="mt-1 text-2xl font-bold text-gray-900">{{pagination.current}}</p>
+            </div>
+            <div class="flex items-center justify-center w-10 h-10 bg-yellow-100 rounded-lg">
+                <i class="text-yellow-600 fas fa-bookmark"></i>
+            </div>
+        </div>
+    </div>
+    
+    <div class="p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-gray-600">หน้าทั้งหมด</p>
+                <p class="mt-1 text-2xl font-bold text-gray-900">{{pagination.total}}</p>
+            </div>
+            <div class="flex items-center justify-center w-10 h-10 bg-green-100 rounded-lg">
+                <i class="text-green-600 fas fa-copy"></i>
+            </div>
+        </div>
+    </div>
+    
+    <div class="p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-gray-600">รายการต่อหน้า</p>
+                <p class="mt-1 text-2xl font-bold text-gray-900">{{pagination.itemsPerPage}}</p>
+            </div>
+            <div class="flex items-center justify-center w-10 h-10 bg-purple-100 rounded-lg">
+                <i class="text-purple-600 fas fa-list"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Documents Table -->
+<div class="overflow-hidden bg-white border border-gray-100 shadow-sm rounded-xl">
+    <div class="p-6 border-b border-gray-100">
+        <div class="flex items-center justify-between">
+            <h3 class="text-lg font-semibold text-gray-900">All Documents</h3>
+            <div class="flex items-center space-x-2">
+                <button class="p-2 text-gray-400 transition duration-200 hover:text-gray-600">
+                    <i class="fas fa-th-large"></i>
+                </button>
+                <button class="p-2 text-gray-600 transition duration-200 hover:text-gray-800">
+                    <i class="fas fa-list"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="overflow-x-auto">
+        <table class="w-full">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                        <input type="checkbox" class="text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                    </th>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Name</th>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Type</th>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Size</th>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Modified</th>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Owner</th>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                {{#if documents}}
+                    {{#each documents}}
+                    <tr class="transition duration-200 hover:bg-gray-50" data-document-id="{{id}}">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <input type="checkbox" class="text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 {{getFileIconBg mimeType}} rounded-lg flex items-center justify-center mr-3">
+                                    <i class="{{getFileIcon mimeType}} {{getFileIconColor mimeType}}"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-medium text-gray-900">{{originalName}}</div>
+                                    <div class="text-sm text-gray-500">{{description}}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{getStatusBg status}} {{getStatusColor status}}">
+                                {{getFileType mimeType}}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">{{formatFileSize size}}</td>
+                        <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{{formatDate createdAt}}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                {{#if owner}}
+                                <div class="flex items-center justify-center w-6 h-6 mr-2 bg-blue-500 rounded-full">
+                                    <span class="text-xs font-medium text-white">{{getInitials owner.firstName owner.lastName}}</span>
+                                </div>
+                                <span class="text-sm text-gray-900">{{owner.firstName}} {{owner.lastName}}</span>
+                                {{else}}
+                                <span class="text-sm text-gray-500">ไม่ระบุ</span>
+                                {{/if}}
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">
+                            <div class="flex items-center space-x-2">
+                                <button class="text-blue-600 transition duration-200 hover:text-blue-900" title="ดูเอกสาร">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="text-green-600 transition duration-200 hover:text-green-900" title="ดาวน์โหลด">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="text-yellow-600 transition duration-200 hover:text-yellow-900" title="แก้ไข">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="text-red-600 transition duration-200 hover:text-red-900" title="ลบ">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {{/each}}
+                {{else}}
+                    <tr>
+                        <td colspan="7" class="px-6 py-12 text-center">
+                            <div class="flex flex-col items-center">
+                                <i class="mb-4 text-4xl text-gray-300 fas fa-file-alt"></i>
+                                <h3 class="mb-2 text-lg font-medium text-gray-900">ยังไม่มีเอกสาร</h3>
+                                <p class="mb-4 text-gray-500">เริ่มต้นโดยการอัพโหลดเอกสารแรกของคุณ</p>
+                                <button id="uploadBtnEmpty" class="px-4 py-2 text-white transition duration-200 bg-blue-600 rounded-lg hover:bg-blue-700">
+                                    <i class="mr-2 fas fa-plus"></i>
+                                    อัพโหลดเอกสาร
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                {{/if}}
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Pagination -->
+    <div class="px-6 py-3 bg-white border-t border-gray-200">
+        <div class="flex items-center justify-between">
+            <div class="text-sm text-gray-700">
+                {{#if pagination.totalItems}}
+                แสดง <span class="font-medium">{{pagination.startItem}}</span> ถึง <span class="font-medium">{{pagination.endItem}}</span> จากทั้งหมด <span class="font-medium">{{pagination.totalItems}}</span> รายการ
+                {{else}}
+                ไม่มีข้อมูล
+                {{/if}}
+            </div>
+            {{#if pagination.totalItems}}
+            <div class="flex items-center space-x-2">
+                <!-- Previous Button -->
+                {{#if pagination.hasPrev}}
+                <a href="?page={{subtract pagination.current 1}}" 
+                   class="px-3 py-1 text-sm text-gray-700 transition duration-200 border border-gray-300 rounded-md hover:bg-gray-50">
+                    ก่อนหน้า
+                </a>
+                {{else}}
+                <span class="px-3 py-1 text-sm text-gray-400 border border-gray-200 rounded-md cursor-not-allowed">
+                    ก่อนหน้า
+                </span>
+                {{/if}}
+
+                <!-- Page Numbers -->
+                {{#each (generatePageNumbers pagination.current pagination.total)}}
+                    {{#if (eq this ../pagination.current)}}
+                    <span class="px-3 py-1 text-sm text-white bg-blue-600 rounded-md">{{this}}</span>
+                    {{else}}
+                    <a href="?page={{this}}" 
+                       class="px-3 py-1 text-sm text-gray-700 transition duration-200 border border-gray-300 rounded-md hover:bg-gray-50">
+                        {{this}}
+                    </a>
+                    {{/if}}
+                {{/each}}
+
+                <!-- Next Button -->
+                {{#if pagination.hasNext}}
+                <a href="?page={{add pagination.current 1}}" 
+                   class="px-3 py-1 text-sm text-gray-700 transition duration-200 border border-gray-300 rounded-md hover:bg-gray-50">
+                    ถัดไป
+                </a>
+                {{else}}
+                <span class="px-3 py-1 text-sm text-gray-400 border border-gray-200 rounded-md cursor-not-allowed">
+                    ถัดไป
+                </span>
+                {{/if}}
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</div>
+
+<!-- Upload Document Modal -->
+<div id="uploadModal" class="fixed inset-0 z-50 flex items-center justify-center hidden p-4 bg-gray-900 bg-opacity-50">
+    <div class="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <!-- Modal Header -->
+        <div class="flex items-center justify-between p-6 border-b border-gray-200">
+            <h3 class="text-xl font-semibold text-gray-900">
+                <i class="mr-2 text-blue-600 fas fa-upload"></i>
+                Upload Document
+            </h3>
+            <button id="closeModal" class="text-gray-400 transition duration-200 hover:text-gray-600">
+                <i class="text-xl fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Modal Body -->
+        <form id="uploadForm" enctype="multipart/form-data" class="p-6">
+            <!-- File Upload Area -->
+            <div class="mb-6">
+                <label class="block mb-2 text-sm font-medium text-gray-700">
+                    เลือกไฟล์ <span class="text-red-500">*</span>
+                </label>
+                <div id="dropZone" class="p-8 text-center transition duration-200 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer hover:border-blue-400">
+                    <div id="dropContent">
+                        <i class="mb-4 text-4xl text-gray-400 fas fa-cloud-upload-alt"></i>
+                        <p class="mb-2 text-lg font-medium text-gray-600">ลากไฟล์มาวางที่นี่ หรือคลิกเพื่อเลือกไฟล์</p>
+                        <p class="text-sm text-gray-500">รองรับไฟล์ PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, TXT, JPG, PNG (สูงสุด 50MB)</p>
+                    </div>
+                    <input type="file" id="fileInput" name="file" class="hidden" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.jpg,.jpeg,.png" required>
+                </div>
+                <div id="filePreview" class="hidden p-4 mt-4 rounded-lg bg-gray-50">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div id="fileIcon" class="flex items-center justify-center w-10 h-10 rounded-lg"></div>
+                            <div>
+                                <p id="fileName" class="text-sm font-medium text-gray-900"></p>
+                                <p id="fileSize" class="text-xs text-gray-500"></p>
+                            </div>
+                        </div>
+                        <button type="button" id="removeFile" class="text-red-500 hover:text-red-700">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document Information -->
+            <div class="grid grid-cols-1 gap-6 mb-6 md:grid-cols-2">
+                <!-- Title -->
+                <div class="md:col-span-2">
+                    <label for="title" class="block mb-2 text-sm font-medium text-gray-700">
+                        ชื่อเอกสาร <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="title" name="title" required 
+                           class="w-full px-3 py-2 transition duration-200 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                           placeholder="กรอกชื่อเอกสาร">
+                </div>
+
+                <!-- Category -->
+                <div>
+                    <label for="categoryId" class="block mb-2 text-sm font-medium text-gray-700">
+                        หมวดหมู่
+                    </label>
+                    <select id="categoryId" name="categoryId" 
+                            class="w-full px-3 py-2 transition duration-200 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">เลือกหมวดหมู่</option>
+                        {{#if categories}}
+                            {{#each categories}}
+                            <option value="{{id}}">{{name}}</option>
+                            {{/each}}
+                        {{else}}
+                            <option value="" disabled>ไม่มีหมวดหมู่ที่ใช้งานได้</option>
+                        {{/if}}
+                    </select>
+                    {{#unless categories}}
+                    <p class="mt-1 text-xs text-gray-500">
+                        <i class="mr-1 fas fa-info-circle"></i>
+                        ไม่มีหมวดหมู่ที่ใช้งานได้ กรุณาติดต่อผู้ดูแลระบบ
+                    </p>
+                    {{/unless}}
+                </div>
+
+                <!-- Status -->
+                <div>
+                    <label for="status" class="block mb-2 text-sm font-medium text-gray-700">
+                        สถานะ <span class="text-red-500">*</span>
+                    </label>
+                    <select id="status" name="status" required
+                            class="w-full px-3 py-2 transition duration-200 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="draft">Draft</option>
+                        <option value="published">Published</option>
+                        <option value="archived">Archived</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-6">
+                <label for="description" class="block mb-2 text-sm font-medium text-gray-700">
+                    คำอธิบาย
+                </label>
+                <textarea id="description" name="description" rows="4"
+                          class="w-full px-3 py-2 transition duration-200 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          placeholder="กรอกคำอธิบายเอกสาร (ไม่บังคับ)"></textarea>
+            </div>
+
+            <!-- Progress Bar -->
+            <div id="uploadProgress" class="hidden mb-6">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm font-medium text-gray-700">กำลังอัพโหลด...</span>
+                    <span id="progressPercent" class="text-sm text-gray-500">0%</span>
+                </div>
+                <div class="w-full h-2 bg-gray-200 rounded-full">
+                    <div id="progressBar" class="h-2 transition-all duration-300 bg-blue-600 rounded-full" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="flex items-center justify-end pt-6 space-x-3 border-t border-gray-200">
+                <button type="button" id="cancelBtn" class="px-4 py-2 text-gray-700 transition duration-200 bg-gray-100 rounded-lg hover:bg-gray-200">
+                    ยกเลิก
+                </button>
+                <button type="submit" id="submitBtn" class="px-6 py-2 text-white transition duration-200 bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <i class="mr-2 fas fa-upload"></i>
+                    อัพโหลด
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const uploadBtn = document.getElementById('uploadBtn')
+    const uploadModal = document.getElementById('uploadModal')
+    const closeModal = document.getElementById('closeModal')
+    const cancelBtn = document.getElementById('cancelBtn')
+    const uploadForm = document.getElementById('uploadForm')
+    const dropZone = document.getElementById('dropZone')
+    const fileInput = document.getElementById('fileInput')
+    const filePreview = document.getElementById('filePreview')
+    const dropContent = document.getElementById('dropContent')
+    const submitBtn = document.getElementById('submitBtn')
+    const uploadProgress = document.getElementById('uploadProgress')
+    const progressBar = document.getElementById('progressBar')
+    const progressPercent = document.getElementById('progressPercent')
+    const categorySelect = document.getElementById('categoryId')
+
+    // Debug: ตรวจสอบข้อมูลที่ได้รับจาก server
+    console.log('=== Documents Page Debug ===')
+    console.log('Categories available:', categorySelect.options.length - 1)
+    
+    // ตรวจสอบจำนวนเอกสารในตาราง
+    const documentRows = document.querySelectorAll('tbody tr[data-document-id]')
+    console.log('Documents in table:', documentRows.length)
+    
+    // ตรวจสอบว่ามี empty state หรือไม่
+    const emptyState = document.querySelector('tbody tr td[colspan="7"]')
+    if (emptyState) {
+        console.log('Empty state detected')
+    }
+
+    // โหลดหมวดหมู่แบบ dynamic (กรณีที่ server-side rendering ไม่ทำงาน)
+    async function loadCategories() {
+        try {
+            const response = await fetch('/backend/categories/api/active')
+            const categories = await response.json()
+            
+            // ล้าง options เดิม (ยกเว้น option แรก)
+            while (categorySelect.options.length > 1) {
+                categorySelect.removeChild(categorySelect.lastChild)
+            }
+            
+            // เพิ่ม options ใหม่
+            if (categories && categories.length > 0) {
+                categories.forEach(category => {
+                    const option = document.createElement('option')
+                    option.value = category.id
+                    option.textContent = category.name
+                    categorySelect.appendChild(option)
+                })
+                console.log('Loaded active categories:', categories.length)
+            } else {
+                const option = document.createElement('option')
+                option.value = ''
+                option.disabled = true
+                option.textContent = 'ไม่มีหมวดหมู่ที่ใช้งานได้'
+                categorySelect.appendChild(option)
+                console.log('No active categories found')
+            }
+        } catch (error) {
+            console.error('Error loading categories:', error)
+        }
+    }
+
+    // เปิด modal
+    async function openModal() {
+        // โหลดหมวดหมู่ล่าสุดก่อนเปิด modal
+        await loadCategories()
+        
+        uploadModal.classList.remove('hidden')
+        document.body.style.overflow = 'hidden'
+    }
+
+    uploadBtn.addEventListener('click', openModal)
+
+    // เปิด modal จากปุ่มในกรณีที่ไม่มีเอกสาร
+    const uploadBtnEmpty = document.getElementById('uploadBtnEmpty')
+    if (uploadBtnEmpty) {
+        uploadBtnEmpty.addEventListener('click', openModal)
+    }
+
+    // ปิด modal
+    function closeModalHandler() {
+        uploadModal.classList.add('hidden')
+        document.body.style.overflow = 'auto'
+        uploadForm.reset()
+        filePreview.classList.add('hidden')
+        dropContent.classList.remove('hidden')
+        uploadProgress.classList.add('hidden')
+    }
+
+    closeModal.addEventListener('click', closeModalHandler)
+    cancelBtn.addEventListener('click', closeModalHandler)
+
+    // ปิด modal เมื่อคลิกนอก modal
+    uploadModal.addEventListener('click', (e) => {
+        if (e.target === uploadModal) {
+            closeModalHandler()
+        }
+    })
+
+    // Drag & Drop functionality
+    dropZone.addEventListener('click', () => fileInput.click())
+    
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault()
+        dropZone.classList.add('border-blue-400', 'bg-blue-50')
+    })
+    
+    dropZone.addEventListener('dragleave', (e) => {
+        e.preventDefault()
+        dropZone.classList.remove('border-blue-400', 'bg-blue-50')
+    })
+    
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault()
+        dropZone.classList.remove('border-blue-400', 'bg-blue-50')
+        const files = e.dataTransfer.files
+        if (files.length > 0) {
+            fileInput.files = files
+            handleFileSelect(files[0])
+        }
+    })
+
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            handleFileSelect(e.target.files[0])
+        }
+    })
+
+    // จัดการไฟล์ที่เลือก
+    function handleFileSelect(file) {
+        // ตรวจสอบขนาดไฟล์ (50MB)
+        if (file.size > 50 * 1024 * 1024) {
+            Swal.fire({
+                icon: 'error',
+                title: 'ไฟล์ใหญ่เกินไป',
+                text: 'ขนาดไฟล์ต้องไม่เกิน 50MB'
+            })
+            return
+        }
+
+        // แสดงข้อมูลไฟล์
+        const fileName = document.getElementById('fileName')
+        const fileSize = document.getElementById('fileSize')
+        const fileIcon = document.getElementById('fileIcon')
+
+        fileName.textContent = file.name
+        fileSize.textContent = formatFileSize(file.size)
+
+        // กำหนดไอคอนตามประเภทไฟล์
+        const extension = file.name.split('.').pop().toLowerCase()
+        const iconConfig = getFileIcon(extension)
+        fileIcon.className = `w-10 h-10 rounded-lg flex items-center justify-center ${iconConfig.bg}`
+        fileIcon.innerHTML = `<i class="${iconConfig.icon} ${iconConfig.color}"></i>`
+
+        // แสดง preview และซ่อน drop content
+        filePreview.classList.remove('hidden')
+        dropContent.classList.add('hidden')
+
+        // ตั้งชื่อเอกสารอัตโนมัติ (ถ้ายังไม่ได้กรอก)
+        const titleInput = document.getElementById('title')
+        if (!titleInput.value) {
+            titleInput.value = file.name.replace(/\.[^/.]+$/, "")
+        }
+    }
+
+    // ลบไฟล์
+    document.getElementById('removeFile').addEventListener('click', () => {
+        fileInput.value = ''
+        filePreview.classList.add('hidden')
+        dropContent.classList.remove('hidden')
+    })
+
+    // ส่งฟอร์ม
+    uploadForm.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        
+        if (!fileInput.files[0]) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'กรุณาเลือกไฟล์',
+                text: 'กรุณาเลือกไฟล์ที่ต้องการอัพโหลด'
+            })
+            return
+        }
+
+        const formData = new FormData()
+        formData.append('file', fileInput.files[0])
+        formData.append('title', document.getElementById('title').value)
+        formData.append('description', document.getElementById('description').value)
+        formData.append('categoryId', document.getElementById('categoryId').value)
+        formData.append('status', document.getElementById('status').value)
+
+        try {
+            submitBtn.disabled = true
+            uploadProgress.classList.remove('hidden')
+
+            const xhr = new XMLHttpRequest()
+            
+            // Progress tracking
+            xhr.upload.addEventListener('progress', (e) => {
+                if (e.lengthComputable) {
+                    const percentComplete = (e.loaded / e.total) * 100
+                    progressBar.style.width = percentComplete + '%'
+                    progressPercent.textContent = Math.round(percentComplete) + '%'
+                }
+            })
+
+            xhr.onload = function() {
+                if (xhr.status === 200 || xhr.status === 201) {
+                    const response = JSON.parse(xhr.responseText)
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'อัพโหลดสำเร็จ',
+                            text: response.message || 'อัพโหลดเอกสารเรียบร้อยแล้ว'
+                        }).then(() => {
+                            closeModalHandler()
+                            location.reload() // รีโหลดหน้าเพื่อแสดงเอกสารใหม่
+                        })
+                    } else {
+                        throw new Error(response.message || 'เกิดข้อผิดพลาดในการอัพโหลด')
+                    }
+                } else {
+                    throw new Error('เกิดข้อผิดพลาดในการอัพโหลด')
+                }
+            }
+
+            xhr.onerror = function() {
+                throw new Error('เกิดข้อผิดพลาดในการเชื่อมต่อ')
+            }
+
+            xhr.open('POST', '/backend/documents/upload')
+            xhr.send(formData)
+
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'เกิดข้อผิดพลาด',
+                text: error.message || 'ไม่สามารถอัพโหลดไฟล์ได้'
+            })
+        } finally {
+            submitBtn.disabled = false
+            uploadProgress.classList.add('hidden')
+            progressBar.style.width = '0%'
+            progressPercent.textContent = '0%'
+        }
+    })
+
+    // Helper functions
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes'
+        const k = 1024
+        const sizes = ['Bytes', 'KB', 'MB', 'GB']
+        const i = Math.floor(Math.log(bytes) / Math.log(k))
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
+    }
+
+    function getFileIcon(extension) {
+        const icons = {
+            pdf: { icon: 'fas fa-file-pdf', color: 'text-red-600', bg: 'bg-red-100' },
+            doc: { icon: 'fas fa-file-word', color: 'text-blue-600', bg: 'bg-blue-100' },
+            docx: { icon: 'fas fa-file-word', color: 'text-blue-600', bg: 'bg-blue-100' },
+            xls: { icon: 'fas fa-file-excel', color: 'text-green-600', bg: 'bg-green-100' },
+            xlsx: { icon: 'fas fa-file-excel', color: 'text-green-600', bg: 'bg-green-100' },
+            ppt: { icon: 'fas fa-file-powerpoint', color: 'text-orange-600', bg: 'bg-orange-100' },
+            pptx: { icon: 'fas fa-file-powerpoint', color: 'text-orange-600', bg: 'bg-orange-100' },
+            txt: { icon: 'fas fa-file-alt', color: 'text-gray-600', bg: 'bg-gray-100' },
+            jpg: { icon: 'fas fa-file-image', color: 'text-purple-600', bg: 'bg-purple-100' },
+            jpeg: { icon: 'fas fa-file-image', color: 'text-purple-600', bg: 'bg-purple-100' },
+            png: { icon: 'fas fa-file-image', color: 'text-purple-600', bg: 'bg-purple-100' }
+        }
+        return icons[extension] || { icon: 'fas fa-file', color: 'text-gray-600', bg: 'bg-gray-100' }
+    }
+})
+</script>

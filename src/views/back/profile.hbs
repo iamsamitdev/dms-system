@@ -1,0 +1,348 @@
+<!-- Profile Header -->
+<div class="mb-8">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900">Profile Settings</h1>
+            <p class="mt-2 text-gray-600">Manage your personal information and account preferences.</p>
+        </div>
+        <div class="mt-4 sm:mt-0 flex space-x-3">
+            <button class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-50 transition duration-200">
+                <i class="fas fa-undo mr-2"></i>
+                Cancel
+            </button>
+            <button class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-2 rounded-lg font-semibold hover:from-blue-600 hover:to-indigo-700 transition duration-200 transform hover:scale-105 shadow-lg">
+                <i class="fas fa-save mr-2"></i>
+                Save Changes
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Profile Content -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Main Profile Panel -->
+    <div class="lg:col-span-2 space-y-6">
+        <!-- Personal Information -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100">
+            <div class="p-6 border-b border-gray-100">
+                <h3 class="text-lg font-semibold text-gray-900">Personal Information</h3>
+                <p class="text-sm text-gray-600 mt-1">Update your personal details and contact information</p>
+            </div>
+            <div class="p-6 space-y-6">
+                <!-- Profile Picture -->
+                <div class="flex items-center space-x-6">
+                    <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full flex items-center justify-center">
+                        <span class="text-2xl text-white font-bold">AD</span>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-medium text-gray-900">Profile Picture</h4>
+                        <p class="text-xs text-gray-500 mb-3">JPG, GIF or PNG. 1MB max.</p>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 bg-blue-600 text-white text-xs rounded-lg hover:bg-blue-700 transition duration-200">
+                                Upload new
+                            </button>
+                            <button class="px-3 py-1 border border-gray-300 text-gray-700 text-xs rounded-lg hover:bg-gray-50 transition duration-200">
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Name Fields -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                        <input type="text" value="Admin" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                        <input type="text" value="User" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                    </div>
+                </div>
+                
+                <!-- Contact Information -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                        <input type="email" value="admin@dmssystem.com" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                        <input type="tel" value="+66 2 123 4567" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                    </div>
+                </div>
+                
+                <!-- Username -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Username</label>
+                    <input type="text" value="admin" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                    <p class="text-xs text-gray-500 mt-1">This will be your unique identifier in the system</p>
+                </div>
+                
+                <!-- Bio -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Bio</label>
+                    <textarea rows="3" placeholder="Tell us about yourself..." class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">System Administrator with 5+ years of experience in document management systems.</textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Settings -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100">
+            <div class="p-6 border-b border-gray-100">
+                <h3 class="text-lg font-semibold text-gray-900">Security Settings</h3>
+                <p class="text-sm text-gray-600 mt-1">Manage your password and security preferences</p>
+            </div>
+            <div class="p-6 space-y-6">
+                <!-- Change Password -->
+                <div>
+                    <h4 class="text-sm font-medium text-gray-900 mb-4">Change Password</h4>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Current Password</label>
+                            <input type="password" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">New Password</label>
+                                <input type="password" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Confirm New Password</label>
+                                <input type="password" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                            </div>
+                        </div>
+                        <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200">
+                            Update Password
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Two-Factor Authentication -->
+                <div class="border-t border-gray-200 pt-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-900">Two-Factor Authentication</h4>
+                            <p class="text-xs text-gray-500">Add an extra layer of security to your account</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Login Sessions -->
+                <div class="border-t border-gray-200 pt-6">
+                    <h4 class="text-sm font-medium text-gray-900 mb-4">Active Sessions</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-desktop text-green-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900">Current Session</p>
+                                    <p class="text-xs text-gray-500">Chrome on macOS • Bangkok, Thailand</p>
+                                </div>
+                            </div>
+                            <span class="text-xs text-green-600 font-medium">Active</span>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-mobile-alt text-gray-600 text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900">Mobile App</p>
+                                    <p class="text-xs text-gray-500">iOS Safari • 2 hours ago</p>
+                                </div>
+                            </div>
+                            <button class="text-xs text-red-600 hover:text-red-800 font-medium">Revoke</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preferences -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100">
+            <div class="p-6 border-b border-gray-100">
+                <h3 class="text-lg font-semibold text-gray-900">Preferences</h3>
+                <p class="text-sm text-gray-600 mt-1">Customize your experience and notification settings</p>
+            </div>
+            <div class="p-6 space-y-6">
+                <!-- Language & Region -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Language</label>
+                        <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                            <option>English (US)</option>
+                            <option>ไทย (Thai)</option>
+                            <option>日本語 (Japanese)</option>
+                            <option>中文 (Chinese)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Time Zone</label>
+                        <select class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                            <option>UTC+07:00 (Bangkok)</option>
+                            <option>UTC+00:00 (London)</option>
+                            <option>UTC-05:00 (New York)</option>
+                            <option>UTC+09:00 (Tokyo)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Notification Preferences -->
+                <div>
+                    <h4 class="text-sm font-medium text-gray-900 mb-4">Notification Preferences</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-700">Email Notifications</p>
+                                <p class="text-xs text-gray-500">Receive email updates about your account</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" checked class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-700">Document Sharing Alerts</p>
+                                <p class="text-xs text-gray-500">Get notified when documents are shared with you</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" checked class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-700">System Updates</p>
+                                <p class="text-xs text-gray-500">Receive notifications about system maintenance</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer">
+                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Sidebar -->
+    <div class="space-y-6">
+        <!-- Account Overview -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100">
+            <div class="p-6 border-b border-gray-100">
+                <h3 class="text-lg font-semibold text-gray-900">Account Overview</h3>
+            </div>
+            <div class="p-6 space-y-4">
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-600">Account Type</span>
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                        Administrator
+                    </span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-600">Member Since</span>
+                    <span class="text-sm font-medium text-gray-900">Jan 2024</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-600">Last Login</span>
+                    <span class="text-sm font-medium text-gray-900">2 hours ago</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-600">Documents Uploaded</span>
+                    <span class="text-sm font-medium text-gray-900">234</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity Summary -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100">
+            <div class="p-6 border-b border-gray-100">
+                <h3 class="text-lg font-semibold text-gray-900">Recent Activity</h3>
+            </div>
+            <div class="p-6 space-y-4">
+                <div class="flex items-start space-x-3">
+                    <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mt-0.5">
+                        <i class="fas fa-upload text-blue-600 text-xs"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-900">Uploaded document</p>
+                        <p class="text-xs text-gray-500">Annual Report 2024.pdf</p>
+                        <p class="text-xs text-gray-400">2 hours ago</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start space-x-3">
+                    <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mt-0.5">
+                        <i class="fas fa-user-plus text-green-600 text-xs"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-900">Added new user</p>
+                        <p class="text-xs text-gray-500">Sarah Wilson</p>
+                        <p class="text-xs text-gray-400">1 day ago</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start space-x-3">
+                    <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center mt-0.5">
+                        <i class="fas fa-cog text-purple-600 text-xs"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-900">Updated settings</p>
+                        <p class="text-xs text-gray-500">System configuration</p>
+                        <p class="text-xs text-gray-400">2 days ago</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100">
+            <div class="p-6 border-b border-gray-100">
+                <h3 class="text-lg font-semibold text-gray-900">Quick Actions</h3>
+            </div>
+            <div class="p-6 space-y-3">
+                <button class="w-full flex items-center space-x-3 p-3 text-left hover:bg-blue-50 rounded-lg transition duration-200 group">
+                    <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center group-hover:bg-blue-200">
+                        <i class="fas fa-download text-blue-600 text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-900">Export Data</p>
+                        <p class="text-xs text-gray-500">Download your data</p>
+                    </div>
+                </button>
+                
+                <button class="w-full flex items-center space-x-3 p-3 text-left hover:bg-green-50 rounded-lg transition duration-200 group">
+                    <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-200">
+                        <i class="fas fa-shield-alt text-green-600 text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-900">Privacy Settings</p>
+                        <p class="text-xs text-gray-500">Manage privacy</p>
+                    </div>
+                </button>
+                
+                <button class="w-full flex items-center space-x-3 p-3 text-left hover:bg-red-50 rounded-lg transition duration-200 group">
+                    <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center group-hover:bg-red-200">
+                        <i class="fas fa-trash text-red-600 text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-900">Delete Account</p>
+                        <p class="text-xs text-gray-500">Permanently delete</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

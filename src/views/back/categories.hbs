@@ -1,0 +1,580 @@
+<!-- Categories Header -->
+<div class="mb-8">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900">Categories</h1>
+            <p class="mt-2 text-gray-600">จัดการหมวดหมู่เอกสารในระบบ</p>
+        </div>
+        <div class="mt-4 sm:mt-0">
+            <button id="addCategoryBtn" class="px-6 py-2 font-semibold text-white transition duration-200 transform rounded-lg shadow-lg bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 hover:scale-105">
+                <i class="mr-2 fas fa-plus"></i>
+                เพิ่มหมวดหมู่
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Search Bar -->
+<div class="p-6 mb-6 bg-white border border-gray-100 shadow-sm rounded-xl">
+    <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div class="flex-1">
+            <div class="relative">
+                <input type="text" id="searchInput" placeholder="ค้นหาหมวดหมู่..." class="w-full py-2 pl-10 pr-4 transition duration-200 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <i class="text-gray-400 fas fa-search"></i>
+                </div>
+            </div>
+        </div>
+        <div class="flex items-center space-x-2">
+            <span class="text-sm text-gray-500">แสดง:</span>
+            <select id="statusFilter" class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <option value="active">เฉพาะที่ใช้งาน</option>
+                <option value="all">ทั้งหมด</option>
+                <option value="inactive">เฉพาะที่ปิดใช้งาน</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 gap-6 mb-6 md:grid-cols-3">
+    <div class="p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-gray-600">หมวดหมู่ทั้งหมด</p>
+                <p class="mt-1 text-2xl font-bold text-gray-900" id="totalCategories">{{categories.length}}</p>
+            </div>
+            <div class="flex items-center justify-center w-10 h-10 bg-blue-100 rounded-lg">
+                <i class="text-blue-600 fas fa-tags"></i>
+            </div>
+        </div>
+    </div>
+    
+    <div class="p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-gray-600">หมวดหมู่ที่ใช้งาน</p>
+                <p class="mt-1 text-2xl font-bold text-gray-900" id="activeCategories">0</p>
+            </div>
+            <div class="flex items-center justify-center w-10 h-10 bg-green-100 rounded-lg">
+                <i class="text-green-600 fas fa-check-circle"></i>
+            </div>
+        </div>
+    </div>
+    
+    <div class="p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm font-medium text-gray-600">เอกสารในหมวดหมู่</p>
+                <p class="mt-1 text-2xl font-bold text-gray-900" id="documentsInCategories">0</p>
+            </div>
+            <div class="flex items-center justify-center w-10 h-10 bg-purple-100 rounded-lg">
+                <i class="text-purple-600 fas fa-file-alt"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Categories Table -->
+<div class="overflow-hidden bg-white border border-gray-100 shadow-sm rounded-xl">
+    <div class="p-6 border-b border-gray-100">
+        <div class="flex items-center justify-between">
+            <h3 class="text-lg font-semibold text-gray-900">รายการหมวดหมู่</h3>
+            <div class="flex items-center space-x-2">
+                <button class="p-2 text-gray-400 transition duration-200 hover:text-gray-600">
+                    <i class="fas fa-th-large"></i>
+                </button>
+                <button class="p-2 text-gray-600 transition duration-200 hover:text-gray-800">
+                    <i class="fas fa-list"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="overflow-x-auto">
+        <table class="w-full">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                        <input type="checkbox" id="selectAll" class="text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                    </th>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">ชื่อหมวดหมู่</th>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">คำอธิบาย</th>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">สถานะ</th>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">จำนวนเอกสาร</th>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">วันที่สร้าง</th>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">การจัดการ</th>
+                </tr>
+            </thead>
+            <tbody id="categoriesTableBody" class="bg-white divide-y divide-gray-200">
+                {{#if categories}}
+                    {{#each categories}}
+                    <tr class="transition duration-200 hover:bg-gray-50" data-category-id="{{id}}">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <input type="checkbox" class="text-blue-600 border-gray-300 rounded category-checkbox focus:ring-blue-500" value="{{id}}">
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="flex items-center justify-center w-10 h-10 mr-3 bg-blue-100 rounded-lg">
+                                    <i class="text-blue-600 fas fa-tag"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-medium text-gray-900">{{name}}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="max-w-xs text-sm text-gray-900 truncate">
+                                {{#if description}}{{description}}{{else}}<span class="text-gray-400">ไม่มีคำอธิบาย</span>{{/if}}
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            {{#if isActive}}
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                <i class="mr-1 fas fa-check-circle"></i>
+                                ใช้งาน
+                            </span>
+                            {{else}}
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                <i class="mr-1 fas fa-times-circle"></i>
+                                ไม่ใช้งาน
+                            </span>
+                            {{/if}}
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">
+                            <span class="inline-flex items-center px-2 py-1 text-xs font-medium text-gray-800 bg-gray-100 rounded-full">
+                                {{#if documents}}{{documents.length}}{{else}}0{{/if}} เอกสาร
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                            {{formatDate createdAt}}
+                        </td>
+                        <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">
+                            <div class="flex items-center space-x-2">
+                                <button class="text-blue-600 transition duration-200 edit-btn hover:text-blue-900" data-id="{{id}}" title="แก้ไข">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                {{#if isActive}}
+                                <button class="text-yellow-600 transition duration-200 toggle-status-btn hover:text-yellow-900" data-id="{{id}}" data-status="false" title="ปิดใช้งาน">
+                                    <i class="fas fa-eye-slash"></i>
+                                </button>
+                                {{else}}
+                                <button class="text-green-600 transition duration-200 toggle-status-btn hover:text-green-900" data-id="{{id}}" data-status="true" title="เปิดใช้งาน">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                {{/if}}
+                                <button class="text-red-600 transition duration-200 delete-btn hover:text-red-900" data-id="{{id}}" title="ลบ">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {{/each}}
+                {{else}}
+                    <tr>
+                        <td colspan="7" class="px-6 py-12 text-center">
+                            <div class="flex flex-col items-center">
+                                <i class="mb-4 text-4xl text-gray-300 fas fa-tags"></i>
+                                <h3 class="mb-2 text-lg font-medium text-gray-900">ยังไม่มีหมวดหมู่</h3>
+                                <p class="mb-4 text-gray-500">เริ่มต้นโดยการสร้างหมวดหมู่แรกของคุณ</p>
+                                <button id="addCategoryBtnEmpty" class="px-4 py-2 text-white transition duration-200 bg-blue-600 rounded-lg hover:bg-blue-700">
+                                    <i class="mr-2 fas fa-plus"></i>
+                                    เพิ่มหมวดหมู่
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                {{/if}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Category Modal -->
+<div id="categoryModal" class="fixed inset-0 z-50 flex items-center justify-center hidden p-4 bg-gray-900 bg-opacity-50">
+    <div class="w-full max-w-md bg-white shadow-2xl rounded-xl">
+        <!-- Modal Header -->
+        <div class="flex items-center justify-between p-6 border-b border-gray-200">
+            <h3 id="modalTitle" class="text-xl font-semibold text-gray-900">
+                <i class="mr-2 text-blue-600 fas fa-tag"></i>
+                เพิ่มหมวดหมู่ใหม่
+            </h3>
+            <button id="closeModal" class="text-gray-400 transition duration-200 hover:text-gray-600">
+                <i class="text-xl fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Modal Body -->
+        <form id="categoryForm" class="p-6">
+            <input type="hidden" id="categoryId" name="categoryId">
+            
+            <!-- Category Name -->
+            <div class="mb-4">
+                <label for="categoryName" class="block mb-2 text-sm font-medium text-gray-700">
+                    ชื่อหมวดหมู่ <span class="text-red-500">*</span>
+                </label>
+                <input type="text" id="categoryName" name="name" required 
+                       class="w-full px-3 py-2 transition duration-200 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                       placeholder="กรอกชื่อหมวดหมู่">
+                <div id="nameError" class="hidden mt-1 text-sm text-red-500"></div>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-6">
+                <label for="categoryDescription" class="block mb-2 text-sm font-medium text-gray-700">
+                    คำอธิบาย
+                </label>
+                <textarea id="categoryDescription" name="description" rows="3"
+                          class="w-full px-3 py-2 transition duration-200 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                          placeholder="กรอกคำอธิบายหมวดหมู่ (ไม่บังคับ)"></textarea>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="flex items-center justify-end space-x-3">
+                <button type="button" id="cancelBtn" class="px-4 py-2 text-gray-700 transition duration-200 bg-gray-100 rounded-lg hover:bg-gray-200">
+                    ยกเลิก
+                </button>
+                <button type="submit" id="submitBtn" class="px-6 py-2 text-white transition duration-200 bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <i class="mr-2 fas fa-save"></i>
+                    <span id="submitText">บันทึก</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const addCategoryBtn = document.getElementById('addCategoryBtn')
+    const addCategoryBtnEmpty = document.getElementById('addCategoryBtnEmpty')
+    const categoryModal = document.getElementById('categoryModal')
+    const closeModal = document.getElementById('closeModal')
+    const cancelBtn = document.getElementById('cancelBtn')
+    const categoryForm = document.getElementById('categoryForm')
+    const modalTitle = document.getElementById('modalTitle')
+    const submitText = document.getElementById('submitText')
+    const searchInput = document.getElementById('searchInput')
+    const statusFilter = document.getElementById('statusFilter')
+
+    let isEditMode = false
+    let currentCategoryId = null
+
+    // เปิด modal สำหรับเพิ่มหมวดหมู่ใหม่
+    function openAddModal() {
+        isEditMode = false
+        currentCategoryId = null
+        modalTitle.innerHTML = '<i class="mr-2 text-blue-600 fas fa-tag"></i>เพิ่มหมวดหมู่ใหม่'
+        submitText.textContent = 'บันทึก'
+        categoryForm.reset()
+        document.getElementById('categoryId').value = ''
+        document.getElementById('nameError').classList.add('hidden')
+        categoryModal.classList.remove('hidden')
+        document.body.style.overflow = 'hidden'
+    }
+
+    // เปิด modal สำหรับแก้ไขหมวดหมู่
+    function openEditModal(categoryId) {
+        isEditMode = true
+        currentCategoryId = categoryId
+        modalTitle.innerHTML = '<i class="mr-2 text-blue-600 fas fa-edit"></i>แก้ไขหมวดหมู่'
+        submitText.textContent = 'อัพเดท'
+        
+        // ดึงข้อมูลหมวดหมู่
+        fetch(`/backend/categories/api/${categoryId}`)
+            .then(response => response.json())
+            .then(category => {
+                document.getElementById('categoryId').value = category.id
+                document.getElementById('categoryName').value = category.name
+                document.getElementById('categoryDescription').value = category.description || ''
+                document.getElementById('nameError').classList.add('hidden')
+                categoryModal.classList.remove('hidden')
+                document.body.style.overflow = 'hidden'
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'เกิดข้อผิดพลาด',
+                    text: 'ไม่สามารถดึงข้อมูลหมวดหมู่ได้'
+                })
+            })
+    }
+
+    // ปิด modal
+    function closeModalHandler() {
+        categoryModal.classList.add('hidden')
+        document.body.style.overflow = 'auto'
+        categoryForm.reset()
+        isEditMode = false
+        currentCategoryId = null
+    }
+
+    // Event listeners
+    addCategoryBtn.addEventListener('click', openAddModal)
+    if (addCategoryBtnEmpty) {
+        addCategoryBtnEmpty.addEventListener('click', openAddModal)
+    }
+    closeModal.addEventListener('click', closeModalHandler)
+    cancelBtn.addEventListener('click', closeModalHandler)
+
+    // ปิด modal เมื่อคลิกนอก modal
+    categoryModal.addEventListener('click', (e) => {
+        if (e.target === categoryModal) {
+            closeModalHandler()
+        }
+    })
+
+    // ส่งฟอร์ม
+    categoryForm.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        
+        const formData = new FormData(categoryForm)
+        const data = {
+            name: formData.get('name'),
+            description: formData.get('description')
+        }
+
+        try {
+            const url = isEditMode ? `/backend/categories/api/${currentCategoryId}` : '/backend/categories/api'
+            const method = isEditMode ? 'PUT' : 'POST'
+            
+            const response = await fetch(url, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+
+            const result = await response.json()
+
+            if (result.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'สำเร็จ',
+                    text: result.message,
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => {
+                    closeModalHandler()
+                    location.reload()
+                })
+            } else {
+                if (result.message.includes('ชื่อหมวดหมู่นี้มีอยู่แล้ว')) {
+                    document.getElementById('nameError').textContent = result.message
+                    document.getElementById('nameError').classList.remove('hidden')
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'เกิดข้อผิดพลาด',
+                        text: result.message
+                    })
+                }
+            }
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'เกิดข้อผิดพลาด',
+                text: 'ไม่สามารถบันทึกข้อมูลได้'
+            })
+        }
+    })
+
+    // แก้ไขหมวดหมู่
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('.edit-btn')) {
+            const categoryId = e.target.closest('.edit-btn').dataset.id
+            openEditModal(categoryId)
+        }
+    })
+
+    // เปลี่ยนสถานะหมวดหมู่
+    document.addEventListener('click', async (e) => {
+        if (e.target.closest('.toggle-status-btn')) {
+            const btn = e.target.closest('.toggle-status-btn')
+            const categoryId = btn.dataset.id
+            const newStatus = btn.dataset.status === 'true'
+            const row = btn.closest('tr')
+            
+            try {
+                const response = await fetch(`/backend/categories/api/${categoryId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ isActive: newStatus })
+                })
+
+                const result = await response.json()
+
+                if (result.success) {
+                    // แสดง success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'สำเร็จ',
+                        text: `${newStatus ? 'เปิด' : 'ปิด'}ใช้งานหมวดหมู่แล้ว`,
+                        timer: 1500,
+                        showConfirmButton: false
+                    })
+
+                    // อัพเดท UI แบบ real-time
+                    if (newStatus) {
+                        // เปลี่ยนเป็นสถานะ active
+                        const statusBadge = row.querySelector('td:nth-child(4) span')
+                        statusBadge.className = 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800'
+                        statusBadge.innerHTML = '<i class="mr-1 fas fa-check-circle"></i>ใช้งาน'
+                        
+                        // เปลี่ยนปุ่มเป็น disable
+                        btn.className = 'text-yellow-600 transition duration-200 toggle-status-btn hover:text-yellow-900'
+                        btn.dataset.status = 'false'
+                        btn.title = 'ปิดใช้งาน'
+                        btn.innerHTML = '<i class="fas fa-eye-slash"></i>'
+                    } else {
+                        // ซ่อนแถวเมื่อปิดใช้งาน (fade out effect)
+                        row.style.transition = 'opacity 0.5s ease-out'
+                        row.style.opacity = '0'
+                        
+                        setTimeout(() => {
+                            row.style.display = 'none'
+                            updateStats() // อัพเดทสถิติ
+                        }, 500)
+                    }
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'เกิดข้อผิดพลาด',
+                        text: result.message
+                    })
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'เกิดข้อผิดพลาด',
+                    text: 'ไม่สามารถเปลี่ยนสถานะได้'
+                })
+            }
+        }
+    })
+
+    // ลบหมวดหมู่
+    document.addEventListener('click', async (e) => {
+        if (e.target.closest('.delete-btn')) {
+            const categoryId = e.target.closest('.delete-btn').dataset.id
+            
+            const result = await Swal.fire({
+                title: 'ยืนยันการลบ',
+                text: 'คุณต้องการลบหมวดหมู่นี้หรือไม่?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'ลบ',
+                cancelButtonText: 'ยกเลิก'
+            })
+
+            if (result.isConfirmed) {
+                try {
+                    const response = await fetch(`/backend/categories/api/${categoryId}`, {
+                        method: 'DELETE'
+                    })
+
+                    const deleteResult = await response.json()
+
+                    if (deleteResult.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'ลบสำเร็จ',
+                            text: deleteResult.message,
+                            timer: 1500,
+                            showConfirmButton: false
+                        }).then(() => {
+                            location.reload()
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'เกิดข้อผิดพลาด',
+                            text: deleteResult.message
+                        })
+                    }
+                } catch (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'เกิดข้อผิดพลาด',
+                        text: 'ไม่สามารถลบหมวดหมู่ได้'
+                    })
+                }
+            }
+        }
+    })
+
+    // ค้นหาหมวดหมู่
+    searchInput.addEventListener('input', filterCategories)
+    statusFilter.addEventListener('change', filterCategories)
+
+    function filterCategories() {
+        const searchTerm = searchInput.value.toLowerCase()
+        const statusValue = statusFilter.value
+        const rows = document.querySelectorAll('#categoriesTableBody tr[data-category-id]')
+
+        rows.forEach(row => {
+            const name = row.querySelector('td:nth-child(2)').textContent.toLowerCase()
+            const description = row.querySelector('td:nth-child(3)').textContent.toLowerCase()
+            
+            // ตรวจสอบสถานะจาก CSS class ของ badge
+            const statusBadge = row.querySelector('td:nth-child(4) span')
+            const isActive = statusBadge && statusBadge.classList.contains('bg-green-100')
+
+            const matchesSearch = name.includes(searchTerm) || description.includes(searchTerm)
+            const matchesStatus = statusValue === 'all' || 
+                                (statusValue === 'active' && isActive) || 
+                                (statusValue === 'inactive' && !isActive)
+
+            if (matchesSearch && matchesStatus) {
+                row.style.display = ''
+                row.style.opacity = '1'
+            } else {
+                row.style.display = 'none'
+            }
+        })
+    }
+
+    // อัพเดทสถิติ
+    function updateStats() {
+        const allRows = document.querySelectorAll('#categoriesTableBody tr[data-category-id]')
+        
+        // นับจากข้อมูลทั้งหมด
+        const totalCategories = allRows.length
+        let activeCategories = 0
+        let totalDocuments = 0
+        
+        allRows.forEach(row => {
+            // ตรวจสอบสถานะจาก CSS class ของ badge
+            const statusBadge = row.querySelector('td:nth-child(4) span')
+            const isActive = statusBadge && statusBadge.classList.contains('bg-green-100')
+            
+            if (isActive) {
+                activeCategories++
+            }
+            
+            // นับเอกสาร
+            const docCountText = row.querySelector('td:nth-child(5) span').textContent
+            const count = parseInt(docCountText.match(/\d+/)?.[0] || '0')
+            totalDocuments += count
+        })
+        
+        document.getElementById('totalCategories').textContent = totalCategories
+        document.getElementById('activeCategories').textContent = activeCategories
+        document.getElementById('documentsInCategories').textContent = totalDocuments
+    }
+
+    // ตั้งค่า default filter เป็น "เฉพาะที่ใช้งาน"
+    document.addEventListener('DOMContentLoaded', function() {
+        // อัพเดทสถิติก่อน (จากข้อมูลทั้งหมด)
+        updateStats()
+        
+        // จากนั้นค่อยตั้งค่า filter
+        statusFilter.value = 'active'
+        filterCategories()
+    })
+})
+</script> 
